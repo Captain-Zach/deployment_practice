@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>This is the dashboard!</h1>
+    <form action="/trips/new"><button>Create Trip</button></form>
+ 
+    <a href="/log_out">Log out?</a>
+    <h2>Hello {{current_user.f_name}}!</h2>
+    
+
+    <h3>Your trips: </h3>
+    <table>
+        <thead>
+            <th>Destination</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Plan</th>
+            <th>Actions</th>
+        </thead>
+        {% for trip in current_user.trips_made.all %}
+        <tr>
+            <td><a href="/trips/{{trip.id}}">{{trip.dest}}</a></td>
+            <td>{{trip.start_date}}</td>
+            <td>{{trip.end_date}}</td>
+            <td>{{trip.plan}}</td>
+            <td><a href="/trips/{{trip.id}}/delete">Remove</a> <a href="/trips/edit/{{trip.id}}">Edit</a></td>
+        </tr>
+        {% endfor %}
+        {% for trip in user_joined %}
+        <tr>
+            <td><a href="/trips/{{trip.id}}">{{trip.dest}}</a></td>
+            <td>{{trip.start_date}}</td>
+            <td>{{trip.end_date}}</td>
+            <td>{{trip.plan}}</td>
+            <td><a href="/cancel/{{trip.id}}">Cancel?</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Other people's trips</h3>
+    <table>
+        <thead>
+            <th>Destination</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Plan</th>
+            <th>Want to Join?</th>
+        </thead>
+        {% for trip in other_trips %}
+            <tr>
+                <td><a href="/trips/{{trip.id}}">{{trip.dest}}</a></td>
+                <td>{{trip.start_date}}</td>
+                <td>{{trip.end_date}}</td>
+                <td>{{trip.plan}}</td>
+                <td><a href="/join/{{trip.id}}">Join?</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

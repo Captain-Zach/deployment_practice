@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello USER_FNAME!  Create a trip!</h1>
+    <a href="/log_out">Log out?</a>
+
+    <h3>PUT WARNINGS HERE</h3>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div>
+        <form action="/trips/new/create" method="POST">
+            {% csrf_token %}
+            <label for="dest">Destination:</label>
+            <input type="text" name="dest" id=""><br>
+            <label for="start_date">Start Date: </label>
+            <input type="date" name="start_date" id=""><br>
+            <label for="end_date">End Date:</label>
+            <input type="date" name="end_date" id=""><br>
+            <label for="plan">Plan</label>
+            <input type="text" name="plan" id=""><br>
+            <button name="confirm">Submit</button>
+        </form>
+        <form action="/dashboard">
+            <button name="cancel" value="cancel">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>

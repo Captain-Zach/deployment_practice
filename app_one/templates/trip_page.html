@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Hello {{user.f_name}}! Read about this trip!</h2>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/log_out">Log out?</a>
+
+
+    <h3>{{trip.dest}}</h3>
+    <div>
+        <h4>Start Date: {{trip.start_date}}</h4>
+        <h4>End Date: {{trip.end_date}}</h4>
+        <h4>Created On: {{trip.created_at}}</h4>
+        <h4>Last Updated: {{trip.updated_at}}</h4>
+        <h4>Plan: {{trip.plan}}</h4>
+        <h4>Created by: {{trip.made_by.f_name}}</h4>
+    </div>
+    <div>
+        <h4>People who've joined this trip</h4>
+        {% for person in trip.joined_by.all %}
+        <h4>{{person.f_name}}</h4>
+        {% endfor %}
+    </div>
+</body>
+</html>
